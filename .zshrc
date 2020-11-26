@@ -12,6 +12,13 @@ setopt autocd
 setopt cdablevars
 setopt prompt_subst
 
+autoload -U colours
+autoload -Uz vcs_info
+
+bindkey '^[[A' up-line-or-search
+bindkey '^[[B' down-line-or-search
+bindkey '^I' first-tab
+
 alias sudo="sudo "
 alias clc="tput reset"
 alias ll="ls -ltF"
@@ -26,17 +33,13 @@ alias wttr="curl wttr.in/Tampere'?'2qn"
 alias password="head /dev/urandom | tr -dc A-Za-z0-9 | head -c 18 ; echo ''"
 # alias rg="fgrep -r"
 
-## search history with arrow keys ##
-bindkey '^[[A' up-line-or-search
-bindkey '^[[B' down-line-or-search
-bindkey '^I' first-tab
-
 ## from oh-my-zsh sources ##
 function take() {
   mkdir -p $@ && cd ${@:$#}
 }
 
 ## tab on empty line brings up cd + suggestions ##
+## https://unix.stackexchange.com/a/32426 ##
 first-tab() {
     if [[ $#BUFFER == 0 ]]; then
         BUFFER="cd "
@@ -48,26 +51,14 @@ first-tab() {
 }
 zle -N first-tab
 
-branch_colour() {
-#  if [[ $(ls -a | grep -x .git) != "" ]]; then
-#    git fetch > /dev/null 2>&1
-#  fi
-  local STATUS=$(git status -uno 2> /dev/null | fgrep "up to date")
-  
-  if [[ $STATUS != "" ]]; then
-    echo ""
-  else
-    echo "red"
-  fi
-}
-
+## git branch prompt on right side ##
 ## from https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Zsh ##
-autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
 RPROMPT=%{%B%F{130}%}\$vcs_info_msg_0_%b
-zstyle ':vcs_info:git:*' formats '%b%u%c'
+zstyle ':vcs_info:git:*' formats '%b'
 
+## prompt ##
 PROMPT='%{%F{067}%}[%c]%{%F{none}%} %(!.#.)> '
 
 # >>> conda initialize >>>
@@ -84,32 +75,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-
-
-
-## VANHAA PASKAA ##
-#git_branch() {
-#  local br=$(git symbolic-ref --short HEAD 2> /dev/null)
-#  if [[ $br == "" ]]; then
-#    echo -n " "
-#  else
-#    echo -n " $br "
-#  fi
-#}
-#
-## use with git autofetch ##
-#branch_colour() {
-##  if [[ $(ls -a | grep -x .git) != "" ]]; then
-##    git fetch > /dev/null 2>&1
-##  fi
-#
-#  local STATUS=$(git status -uno 2> /dev/null | fgrep "up to date")
-#  
-#  if [[ $STATUS != "" ]]; then
-#    echo "green"
-#  else
-#    echo "red"
-#  fi
-#}
-#PROMPT='%{%F{cyan}%}[%c]%{%B%F{yellow}%}$(git_branch)%b%{%F{none}%}%(!.#.)> '
