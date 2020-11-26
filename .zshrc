@@ -17,6 +17,7 @@ alias clc="tput reset"
 alias ll="ls -ltF"
 alias la="ls -latF"
 alias lg="ls -la | grep"
+alias fwd='echo "$(tput setaf 6)[$(pwd)]"'
 alias yeet="cp -i /dev/null"
 alias rfind="sudo find . -print | fgrep -i"
 alias {duhs,dush}="sudo du -hs * 2>/dev/null"
@@ -47,31 +48,27 @@ first-tab() {
 }
 zle -N first-tab
 
-git_branch() {
-  local br=$(git symbolic-ref --short HEAD 2> /dev/null)
-  if [[ $br == "" ]]; then
-    echo -n " "
+branch_colour() {
+#  if [[ $(ls -a | grep -x .git) != "" ]]; then
+#    git fetch > /dev/null 2>&1
+#  fi
+  local STATUS=$(git status -uno 2> /dev/null | fgrep "up to date")
+  
+  if [[ $STATUS != "" ]]; then
+    echo ""
   else
-    echo -n " $br "
+    echo "red"
   fi
 }
 
-## use with git autofetch ##
-#branch_colour() {
-##  if [[ $(ls -a | grep -x .git) != "" ]]; then
-##    git fetch > /dev/null 2>&1
-##  fi
-#
-#  local STATUS=$(git status -uno 2> /dev/null | fgrep "up to date")
-#  
-#  if [[ $STATUS != "" ]]; then
-#    echo "green"
-#  else
-#    echo "red"
-#  fi
-#}
+## from https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Zsh ##
+autoload -Uz vcs_info
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+RPROMPT=%{%B%F{130}%}\$vcs_info_msg_0_%b
+zstyle ':vcs_info:git:*' formats '%b%u%c'
 
-PROMPT='%{%F{cyan}%}[%c]%{%B%F{yellow}%}$(git_branch)%b%{%F{none}%}%(!.#.)> '
+PROMPT='%{%F{067}%}[%c]%{%F{none}%} %(!.#.)> '
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -87,3 +84,32 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+
+
+
+## VANHAA PASKAA ##
+#git_branch() {
+#  local br=$(git symbolic-ref --short HEAD 2> /dev/null)
+#  if [[ $br == "" ]]; then
+#    echo -n " "
+#  else
+#    echo -n " $br "
+#  fi
+#}
+#
+## use with git autofetch ##
+#branch_colour() {
+##  if [[ $(ls -a | grep -x .git) != "" ]]; then
+##    git fetch > /dev/null 2>&1
+##  fi
+#
+#  local STATUS=$(git status -uno 2> /dev/null | fgrep "up to date")
+#  
+#  if [[ $STATUS != "" ]]; then
+#    echo "green"
+#  else
+#    echo "red"
+#  fi
+#}
+#PROMPT='%{%F{cyan}%}[%c]%{%B%F{yellow}%}$(git_branch)%b%{%F{none}%}%(!.#.)> '
