@@ -12,12 +12,21 @@ setopt autocd
 setopt cdablevars
 setopt prompt_subst
 
+zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+zstyle ':completion:*' menu select
+zstyle ':vcs_info:git:*' formats '%b'
+
+autoload -U compinit
 autoload -U colours
 autoload -Uz vcs_info
 
+bindkey '^I' first-tab
 bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
-bindkey '^I' first-tab
+#bindkey -M menuselect 'h' vi-backward-char
+#bindkey -M menuselect 'k' vi-up-line-or-history
+#bindkey -M menuselect 'l' vi-forward-char
+#bindkey -M menuselect 'j' vi-down-line-or-history
 
 alias sudo="sudo "
 alias clc="tput reset"
@@ -26,12 +35,16 @@ alias la="ls -latF"
 alias lg="ls -la | grep"
 alias fwd='echo "$(tput setaf 6)[$(pwd)]"'
 alias yeet="cp -i /dev/null"
+alias motd="cat /etc/motd"
 alias rfind="sudo find . -print | fgrep -i"
 alias {duhs,dush}="sudo du -hs * 2>/dev/null"
 alias ports="sudo netstat -tulpan | grep LISTEN"
 alias wttr="curl wttr.in/Tampere'?'2qn"
 alias password="head /dev/urandom | tr -dc A-Za-z0-9 | head -c 18 ; echo ''"
 # alias rg="fgrep -r"
+
+## arrow keys suggestion nav ##
+compinit
 
 ## from oh-my-zsh sources ##
 function take() {
@@ -56,7 +69,6 @@ zle -N first-tab
 precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
 RPROMPT=%{%B%F{130}%}\$vcs_info_msg_0_%b
-zstyle ':vcs_info:git:*' formats '%b'
 
 ## prompt ##
 PROMPT='%{%F{067}%}[%c]%{%F{none}%} %(!.#.)> '
