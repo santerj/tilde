@@ -48,15 +48,21 @@ first-tab() {
 zle -N first-tab
 
 git_branch() {
-  git symbolic-ref --short HEAD 2> /dev/null
+  local br=$(git symbolic-ref --short HEAD 2> /dev/null)
+  if [[ $br == "" ]]; then
+    echo -n " "
+  else
+    echo -n " $br "
+  fi
 }
 
+## use with git autofetch ##
 #branch_colour() {
-#  if [[ $(ls -a | grep -x .git) != "" ]]; then
-#    git fetch > /dev/null 2>&1
-#  fi
+##  if [[ $(ls -a | grep -x .git) != "" ]]; then
+##    git fetch > /dev/null 2>&1
+##  fi
 #
-#  STATUS=$(git status -uno 2> /dev/null | fgrep "up to date")
+#  local STATUS=$(git status -uno 2> /dev/null | fgrep "up to date")
 #  
 #  if [[ $STATUS != "" ]]; then
 #    echo "green"
@@ -65,8 +71,7 @@ git_branch() {
 #  fi
 #}
 
-#PROMPT='%{%F{cyan}%}[%c] %{%F{$(branch_colour)}%}$(git_branch)%{%F{none}%}> '
-PROMPT='%{%F{cyan}%}[%c] %{%F{yellow}%}$(git_branch)%{%F{none}%}> '
+PROMPT='%{%F{cyan}%}[%c]%{%B%F{yellow}%}$(git_branch)%b%{%F{none}%}%(!.#.)> '
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
