@@ -62,7 +62,6 @@ branch_colour() {
 
 PROMPT='%{%F{cyan}%}[%c] %{%F{$(branch_colour)}%}$(git_branch)%{%F{none}%}> '
 
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/santeri/bin/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
