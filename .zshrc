@@ -52,7 +52,12 @@ git_branch() {
 }
 
 branch_colour() {
+  if [[ $(ls -a | grep -x .git) != "" ]]; then
+    git fetch > /dev/null 2>&1
+  fi
+
   STATUS=$(git status -uno 2> /dev/null | fgrep "up to date")
+  
   if [[ $STATUS != "" ]]; then
     echo "green"
   else
