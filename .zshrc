@@ -51,21 +51,22 @@ git_branch() {
   git symbolic-ref --short HEAD 2> /dev/null
 }
 
-branch_colour() {
-  if [[ $(ls -a | grep -x .git) != "" ]]; then
-    git fetch > /dev/null 2>&1
-  fi
+#branch_colour() {
+#  if [[ $(ls -a | grep -x .git) != "" ]]; then
+#    git fetch > /dev/null 2>&1
+#  fi
+#
+#  STATUS=$(git status -uno 2> /dev/null | fgrep "up to date")
+#  
+#  if [[ $STATUS != "" ]]; then
+#    echo "green"
+#  else
+#    echo "red"
+#  fi
+#}
 
-  STATUS=$(git status -uno 2> /dev/null | fgrep "up to date")
-  
-  if [[ $STATUS != "" ]]; then
-    echo "green"
-  else
-    echo "red"
-  fi
-}
-
-PROMPT='%{%F{cyan}%}[%c] %{%F{$(branch_colour)}%}$(git_branch)%{%F{none}%}> '
+#PROMPT='%{%F{cyan}%}[%c] %{%F{$(branch_colour)}%}$(git_branch)%{%F{none}%}> '
+PROMPT='%{%F{cyan}%}[%c] %{%F{yellow}%}$(git_branch)%{%F{none}%}> '
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
