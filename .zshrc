@@ -71,7 +71,11 @@ precmd_functions+=( precmd_vcs_info )
 RPROMPT=%{%B%F{130}%}\$vcs_info_msg_0_%b
 
 ## prompt ##
-PROMPT='%{%F{067}%}[%c]%{%F{none}%} %(!.#.)> '
+if [[ -z "$SSH_CLIENT" ]]; then
+        PROMPT='%{%F{magenta}%}%n@%m %{%F{067}%}[%c]%{%F{none}%} %(!.#.)> '
+else
+        PROMPT='%{%F{067}%}[%c]%{%F{none}%} %(!.#.)> '
+fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
