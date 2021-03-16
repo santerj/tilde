@@ -1,10 +1,13 @@
-export PATH="/home/santeri/bin/anaconda3/condabin:/usr/local/bin:/usr/bin:/bin:/home/santeri/bin:/usr/local/sbin:/usr/sbin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/home/santeri/bin:/usr/local/sbin:/usr/sbin"
 export EDITOR='vim'
 export GIT_EDITOR='vim'
 export SHELL='/bin/zsh'
-export HISTSIZE=1500
+export HISTSIZE=500
 export HISTFILE="$HOME/.zsh_history"
 export SAVEHIST=$HISTSIZE
+export GOPATH="$HOME/bin/"
+export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
+export LESS=' -R '
 
 setopt correct
 setopt automenu
@@ -23,10 +26,6 @@ autoload -Uz vcs_info
 bindkey '^I' first-tab
 bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
-#bindkey -M menuselect 'h' vi-backward-char
-#bindkey -M menuselect 'k' vi-up-line-or-history
-#bindkey -M menuselect 'l' vi-forward-char
-#bindkey -M menuselect 'j' vi-down-line-or-history
 
 alias sudo="sudo "
 alias clc="tput reset"
@@ -41,6 +40,8 @@ alias {duhs,dush}="sudo du -hs * 2>/dev/null"
 alias ports="sudo netstat -tulpan | grep LISTEN"
 alias wttr="curl wttr.in/Tampere'?'2qn"
 alias password="head /dev/urandom | tr -dc A-Za-z0-9 | head -c 18 ; echo ''"
+alias pretty="python -m json.tool"
+alias bpytop="bpytop --low-color"
 # alias rg="fgrep -r"
 
 ## arrow keys suggestion nav ##
@@ -71,23 +72,8 @@ precmd_functions+=( precmd_vcs_info )
 RPROMPT=%{%B%F{130}%}\$vcs_info_msg_0_%b
 
 ## prompt ##
-if [[ -z "$SSH_CLIENT" ]]; then
+if [[ "$SSH_CLIENT" != "" ]]; then
         PROMPT='%{%F{magenta}%}%n@%m %{%F{067}%}[%c]%{%F{none}%} %(!.#.)> '
 else
         PROMPT='%{%F{067}%}[%c]%{%F{none}%} %(!.#.)> '
 fi
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/santeri/bin/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/santeri/bin/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/santeri/bin/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/santeri/bin/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
