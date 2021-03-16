@@ -41,6 +41,7 @@ alias ports="sudo netstat -tulpan | grep LISTEN"
 alias wttr="curl wttr.in/Tampere'?'2qn"
 alias password="head /dev/urandom | tr -dc A-Za-z0-9 | head -c 18 ; echo ''"
 alias pretty="python -m json.tool"
+alias freeze="python -m pip freeze > requirements.txt"
 alias bpytop="bpytop --low-color"
 # alias rg="fgrep -r"
 
