@@ -5,7 +5,6 @@ export SHELL='/bin/zsh'
 export HISTSIZE=500
 export HISTFILE="$HOME/.zsh_history"
 export SAVEHIST=$HISTSIZE
-export GOPATH="$HOME/bin/"
 export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
 
@@ -73,8 +72,9 @@ precmd_functions+=( precmd_vcs_info )
 RPROMPT=%{%B%F{130}%}\$vcs_info_msg_0_%b
 
 ## prompt ##
-if [[ "$SSH_CLIENT" != "" ]]; then
+if [[ "$SSH_CLIENT" != "" ]];
+then  # display user@host
         PROMPT='%{%F{magenta}%}%n@%m %{%F{067}%}[%c]%{%F{none}%} %(!.#.)> '
-else
+else  # only display working directory
         PROMPT='%{%F{067}%}[%c]%{%F{none}%} %(!.#.)> '
 fi
