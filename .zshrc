@@ -70,7 +70,7 @@ precmd_functions+=( precmd_vcs_info )
 RPROMPT=%{%B%F{130}%}\$vcs_info_msg_0_%b
 
 ## prompt ##
-PROMPT_SYMBOL='≡'
+PROMPT_SYMBOL='>'
 PROMPT='%{%F{067}%}%c%{%F{none}%} $PROMPT_SYMBOL '
 
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
