@@ -40,7 +40,6 @@ alias ports="sudo netstat -tulpan | grep LISTEN"
 alias wttr="curl wttr.in/Tampere'?'2qn"
 alias password="head /dev/urandom | tr -dc A-Za-z0-9 | head -c 18 ; echo ''"
 alias pretty="python -m json.tool"
-alias bpytop="bpytop --low-color"
 # alias rg="fgrep -r"
 
 ## arrow keys suggestion nav ##
@@ -71,9 +70,7 @@ precmd_functions+=( precmd_vcs_info )
 RPROMPT=%{%B%F{130}%}\$vcs_info_msg_0_%b
 
 ## prompt ##
-if [[ "$SSH_CLIENT" != "" ]];
-then  # display user@host
-        PROMPT='%{%F{magenta}%}%n@%m %{%F{067}%}[%c]%{%F{none}%} %(!.#.)> '
-else  # only display working directory
-        PROMPT='%{%F{067}%}[%c]%{%F{none}%} %(!.#.)> '
-fi
+PROMPT_SYMBOL='≡'
+PROMPT='%{%F{067}%}%c%{%F{none}%} $PROMPT_SYMBOL '
+
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
