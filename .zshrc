@@ -46,6 +46,10 @@ alias digs="dig +short"
 ## arrow keys suggestion nav ##
 compinit
 
+function godoc() {
+  go doc $@ | less
+}
+
 ## from oh-my-zsh sources ##
 function take() {
   mkdir -p $@ && cd ${@:$#}
