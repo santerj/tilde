@@ -41,9 +41,14 @@ alias wttr="curl wttr.in/Tampere'?'2qn"
 alias password="head /dev/urandom | tr -dc A-Za-z0-9 | head -c 18 ; echo ''"
 alias pretty="python -m json.tool"
 # alias rg="fgrep -r"
+alias digs="dig +short"
 
 ## arrow keys suggestion nav ##
 compinit
+
+function godoc() {
+  go doc $@ | less
+}
 
 ## from oh-my-zsh sources ##
 function take() {
