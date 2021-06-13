@@ -7,6 +7,8 @@ fi
 
 shopt -s autocd
 shopt -s checkwinsize
+bind 'set show-all-if-ambiguous on'
+bind 'TAB:menu-complete'
 
 # User specific aliases and functions
 alias sudo="sudo "
