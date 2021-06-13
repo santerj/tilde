@@ -27,20 +27,14 @@ bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
 
 alias sudo="sudo "
-alias clc="tput reset"
-alias ll="ls -ltF"
-alias la="ls -latF"
-alias lg="ls -la | grep"
-alias fwd='echo "$(tput setaf 6)[$(pwd)]"'
-alias yeet="cp -i /dev/null"
-alias motd="cat /etc/motd"
+alias clc="tput reset && clear"
+alias ll="ls -latrshF"
 alias rfind="sudo find . -print | fgrep -i"
-alias {duhs,dush}="sudo du -hs * 2>/dev/null"
+alias dush="sudo du -hs * 2>/dev/null"
 alias ports="sudo netstat -tulpan | grep LISTEN"
 alias wttr="curl wttr.in/Tampere'?'2qn"
 alias password="head /dev/urandom | tr -dc A-Za-z0-9 | head -c 18 ; echo ''"
 alias pretty="python -m json.tool"
-# alias rg="fgrep -r"
 alias digs="dig +short"
 
 ## arrow keys suggestion nav ##
