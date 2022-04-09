@@ -7,6 +7,7 @@ export HISTFILE="$HOME/.zsh_history"
 export SAVEHIST=$HISTSIZE
 export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
+#export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 
 setopt correct
 setopt automenu
@@ -28,7 +29,8 @@ bindkey '^[[B' down-line-or-search
 
 alias sudo="sudo "
 alias clc="tput reset && clear"
-alias ll="ls -latrshF"
+alias ls="ls -G"
+alias ll="ls -latrshFG"
 alias rfind="sudo find . -print | fgrep -i"  # recursively search file names
 alias ports="sudo netstat -tulpan | grep LISTEN"
 alias wttr="curl wttr.in/Tampere'?'2qn"
@@ -43,9 +45,6 @@ precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
 RPROMPT=%{%B%F{130}%}\$vcs_info_msg_0_%b
 PROMPT='%{%F{067}%}%c%{%F{none}%} > '
-
-# enable syntax highlighting
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 function fastenv() {
   python3 -m venv venv
@@ -72,3 +71,7 @@ function first-tab() {
     fi
 }
 zle -N first-tab
+
+## enable syntax highlighting ##
+## has to be at the end of zshrc ##
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
