@@ -29,19 +29,30 @@ bindkey '^[[B' down-line-or-search
 alias sudo="sudo "
 alias clc="tput reset && clear"
 alias ll="ls -latrshF"
-alias rfind="sudo find . -print | fgrep -i"
-alias dush="sudo du -hs * 2>/dev/null"
+alias rfind="sudo find . -print | fgrep -i"  # recursively search file names
 alias ports="sudo netstat -tulpan | grep LISTEN"
 alias wttr="curl wttr.in/Tampere'?'2qn"
-alias password="head /dev/urandom | tr -dc A-Za-z0-9 | head -c 18 ; echo ''"
-alias pretty="python -m json.tool"
 alias digs="dig +short"
 
 ## arrow keys suggestion nav ##
 compinit
 
-function godoc() {
-  go doc $@ | less
+## prompts ##
+## git rprompt from https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Zsh ##
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+RPROMPT=%{%B%F{130}%}\$vcs_info_msg_0_%b
+PROMPT='%{%F{067}%}%c%{%F{none}%} > '
+
+# enable syntax highlighting
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+function fastenv() {
+  python3 -m venv venv
+  venv/bin/python -m pip install --upgrade pip
+  if [[ -f "requirements.txt" ]]; then
+    venv/bin/python -m pip install -r requirements.txt
+  fi
 }
 
 ## from oh-my-zsh sources ##
@@ -49,9 +60,9 @@ function take() {
   mkdir -p $@ && cd ${@:$#}
 }
 
-## tab on empty line brings up cd + suggestions ##
+## tab on empty line brings autocompletes cd + displays suggestions ##
 ## https://unix.stackexchange.com/a/32426 ##
-first-tab() {
+function first-tab() {
     if [[ $#BUFFER == 0 ]]; then
         BUFFER="cd "
         CURSOR=3
@@ -61,15 +72,3 @@ first-tab() {
     fi
 }
 zle -N first-tab
-
-## git branch prompt on right side ##
-## from https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Zsh ##
-precmd_vcs_info() { vcs_info }
-precmd_functions+=( precmd_vcs_info )
-RPROMPT=%{%B%F{130}%}\$vcs_info_msg_0_%b
-
-## prompt ##
-PROMPT_SYMBOL='>'
-PROMPT='%{%F{067}%}%c%{%F{none}%} $PROMPT_SYMBOL '
-
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
