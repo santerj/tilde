@@ -30,7 +30,7 @@ bindkey '^[[B' down-line-or-search
 alias sudo="sudo "
 alias clc="tput reset && clear"
 alias ls="ls -G"
-alias ll="ls -latrshFG
+alias ll="ls -latrshFG"
 alias wttr="curl wttr.in/Tampere'?'2qn"
 alias digs="dig +short"
 alias brewu="brew upgrade && brew update && brew autoremove"
@@ -73,4 +73,5 @@ zle -N first-tab
 
 ## enable syntax highlighting ##
 ## has to be at the end of zshrc ##
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
