@@ -1,4 +1,4 @@
-export PATH="/usr/local/bin:/usr/bin:/bin:/home/santeri/bin:/usr/local/sbin:/usr/sbin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/home/santeri/bin:/usr/local/sbin:/usr/sbin:/sbin"
 export EDITOR='vim'
 export GIT_EDITOR='vim'
 export SHELL='/bin/zsh'
@@ -30,11 +30,10 @@ bindkey '^[[B' down-line-or-search
 alias sudo="sudo "
 alias clc="tput reset && clear"
 alias ls="ls -G"
-alias ll="ls -latrshFG"
-alias rfind="sudo find . -print | fgrep -i"  # recursively search file names
-alias ports="sudo netstat -tulpan | grep LISTEN"
+alias ll="ls -latrshFG
 alias wttr="curl wttr.in/Tampere'?'2qn"
 alias digs="dig +short"
+alias brewu="brew upgrade && brew update && brew autoremove"
 
 ## arrow keys suggestion nav ##
 compinit
