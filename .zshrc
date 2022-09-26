@@ -5,8 +5,9 @@ export SHELL='/bin/zsh'
 export HISTSIZE=500
 export HISTFILE="$HOME/.zsh_history"
 export SAVEHIST=$HISTSIZE
-export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
+export LESSOPEN="| /usr/local/Cellar/source-highlight/3.1.9_5/bin/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
+#export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
 #export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 
 setopt correct
@@ -73,5 +74,6 @@ zle -N first-tab
 
 ## enable syntax highlighting ##
 ## has to be at the end of zshrc ##
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/Cellar/zsh-syntax-highlighting/0.7.1/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
