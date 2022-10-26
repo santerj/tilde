@@ -5,9 +5,8 @@ export SHELL='/bin/zsh'
 export HISTSIZE=500
 export HISTFILE="$HOME/.zsh_history"
 export SAVEHIST=$HISTSIZE
-export LESSOPEN="| /usr/local/Cellar/source-highlight/3.1.9_5/bin/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
-#export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
+export HISTORY_IGNORE="(ls|cd|pwd|exit|cd ..)"
 #export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 
 setopt correct
