@@ -18,6 +18,7 @@ alias rg="fgrep -r"
 alias rfind="sudo find . -print | fgrep -i"
 alias dush="sudo du -hs * 2>/dev/null"
 alias ports="sudo netstat -tulpan | grep LISTEN"
+alias aptu="sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y"
 
 function take () {
   mkdir -p -- "$1" && cd -P -- "$1"
