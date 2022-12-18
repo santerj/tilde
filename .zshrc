@@ -51,6 +51,7 @@ function fastenv() {
   if [[ -f "requirements.txt" ]]; then
     venv/bin/python -m pip install -r requirements.txt
   fi
+  source venv/bin/activate
 }
 
 ## from oh-my-zsh sources ##
