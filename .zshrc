@@ -54,6 +54,10 @@ function fastenv() {
   source venv/bin/activate
 }
 
+function whohas () {
+  dig +short -t a $1 | head -1 | xargs whois | grep -i "org-name\|orgname" | uniq
+}
+
 ## from oh-my-zsh sources ##
 function take() {
   mkdir -p $@ && cd ${@:$#}
