@@ -34,6 +34,7 @@ alias ll="ls -latrshFG"
 alias wttr="curl wttr.in/Tampere'?'2qn"
 alias digs="dig +short"
 alias brewu="brew upgrade && brew update && brew autoremove"
+alias finder="open . -a finder"
 
 ## arrow keys suggestion nav ##
 compinit
