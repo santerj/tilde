@@ -2,18 +2,26 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/home/santeri/bin:/usr/local/sbin:/usr
 export EDITOR='vim'
 export GIT_EDITOR='vim'
 export SHELL='/bin/zsh'
-export HISTSIZE=500
 export HISTFILE="$HOME/.zsh_history"
-export SAVEHIST=$HISTSIZE
+export SAVEHIST=500
 export LESS=' -R '
 export HISTORY_IGNORE="(ls|cd|pwd|exit|cd ..)"
-#export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# pipx
+/Users/santeri/.local/bin 
+export PATH="$PATH:/Users/santeri/.local/bin"
 
 setopt correct
 setopt automenu
 setopt autocd
 setopt cdablevars
 setopt prompt_subst
+set -o emacs
 
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 zstyle ':completion:*' menu select
@@ -22,6 +30,8 @@ zstyle ':vcs_info:git:*' formats '%b'
 autoload -U compinit
 autoload -U colours
 autoload -Uz vcs_info
+autoload -U select-word-style
+select-word-style bash
 
 bindkey '^I' first-tab
 bindkey '^[[A' up-line-or-search
@@ -33,7 +43,7 @@ alias ls="ls -G"
 alias ll="ls -latrshFG"
 alias wttr="curl wttr.in/Tampere'?'2qn"
 alias digs="dig +short"
-alias brewu="brew upgrade && brew update && brew autoremove"
+alias brewu="brew upgrade && brew update && brew autoremove && brew cleanup"
 alias finder="open . -a finder"
 
 ## arrow keys suggestion nav ##
@@ -55,7 +65,7 @@ function fastenv() {
   source venv/bin/activate
 }
 
-function whohas () {
+function whohas() {
   dig +short -t a $1 | head -1 | xargs whois | grep -i "org-name\|orgname" | uniq
 }
 
@@ -81,4 +91,4 @@ zle -N first-tab
 ## has to be at the end of zshrc ##
 #source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/local/Cellar/zsh-syntax-highlighting/0.7.1/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/Cellar/zsh-syntax-highlighting/0.8.0/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
