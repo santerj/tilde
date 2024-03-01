@@ -13,7 +13,6 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init -)"
 
 # pipx
-/Users/santeri/.local/bin 
 export PATH="$PATH:/Users/santeri/.local/bin"
 
 setopt correct
