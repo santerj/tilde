@@ -1,0 +1,4 @@
+# Apps installed without package manager:
+
+- Two Notes Torpedo Remote + GENOME - https://www.two-notes.com/en/downloads/
+- Jagex Launcher - https://oldschool.runescape.com/launcher
