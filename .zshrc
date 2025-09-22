@@ -1,62 +1,83 @@
-export PATH="/usr/local/bin:/usr/bin:/bin:/home/santeri/bin:/usr/local/sbin:/usr/sbin:/sbin"
-export EDITOR='vim'
-export GIT_EDITOR='vim'
-export SHELL='/bin/zsh'
+## shell vars ##
 export HISTFILE="$HOME/.zsh_history"
 export SAVEHIST=500
+export SHELL='/bin/zsh'
+export EDITOR='vim'
+export GIT_EDITOR='vim'
 export LESS=' -R '
-export HISTORY_IGNORE="(ls|cd|pwd|exit|cd ..)"
+export PYTHON="$(which python3)"
 
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-# pipx
-export PATH="$PATH:/Users/santeri/.local/bin"
-
-setopt correct
-setopt automenu
-setopt autocd
-setopt cdablevars
-setopt prompt_subst
-set -o emacs
-
-zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
-zstyle ':completion:*' menu select
-zstyle ':vcs_info:git:*' formats '%b'
-
-autoload -U compinit
-autoload -U colours
-autoload -Uz vcs_info
-autoload -U select-word-style
-select-word-style bash
-
-bindkey '^I' first-tab
-bindkey '^[[A' up-line-or-search
-bindkey '^[[B' down-line-or-search
-
+## aliases ##
 alias sudo="sudo "
 alias clc="tput reset && clear"
 alias ls="ls -G"
-alias ll="ls -latrshFG"
+alias la="ls -latrshFG"
 alias wttr="curl wttr.in/Tampere'?'2qn"
 alias digs="dig +short"
 alias brewu="brew upgrade && brew update && brew autoremove && brew cleanup"
 alias finder="open . -a finder"
 
-## arrow keys suggestion nav ##
-compinit
+## path ##
+typeset -U path
+path=(
+  /usr/local/bin
+  /usr/bin
+  /bin
+  $HOME/bin
+  /usr/local/sbin
+  /usr/sbin
+  /sbin
+  $HOME/.local/bin  # for pipx
+)
+
+## emacs keybinds for shell ##
+bindkey -e
+
+## shell options ##
+setopt correct            # correct typos
+setopt automenu           # show completion menu on tab
+setopt autocd             # cd with dir name
+setopt cdablevars         # cd with var name
+setopt prompt_subst       # prompt supports vars
+setopt HIST_IGNORE_SPACE  # prefix space to avoid history
+
+
+## completion styles ##
+zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"  # apply color to lists
+zstyle ':completion:*' menu select                        # interactive menu for tab
+zstyle ':vcs_info:git:*' formats '%b'                     # git info shows branch only
+
+## zsh modules ##
+autoload -U compinit           # completion system
+autoload -U colours            # enable named colors
+autoload -Uz vcs_info          # git info for prompt
+autoload -U select-word-style  # cursor movement by words
+select-word-style bash         # ctrl+arrow moves by words
+compinit                       # initialize completion system
+
+## custom keybinds ##
+bindkey '^I' first-tab              # tab on empty line autocompletes cd + shows suggestions
+bindkey '^[[A' up-line-or-search    # arrow up to search history
+bindkey '^[[B' down-line-or-search  # arrow down to search newer history
 
 ## prompts ##
 ## git rprompt from https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Zsh ##
-precmd_vcs_info() { vcs_info }
-precmd_functions+=( precmd_vcs_info )
-RPROMPT=%{%B%F{130}%}\$vcs_info_msg_0_%b
-PROMPT='%{%F{067}%}%c%{%F{none}%} > '
+precmd_vcs_info() { vcs_info }            # look for git info before each prompt
+precmd_functions+=( precmd_vcs_info )     # run above at each prompt
+RPROMPT=%{%B%F{130}%}\$vcs_info_msg_0_%b  # branch on right in git dirs
+PROMPT='%{%F{067}%}%c%{%F{none}%} > '     # trailing part of pwd + > (~ in home)
 
+## custom functions ##
+
+## don't add the usual stuff to history ##
+function zshaddhistory() {
+  [[ "$1" =~ '^(ls|cd|pwd|exit|cd ..)$' ]] && return 1
+  return 0
+}
+
+## setup and source venv in python projects ##
 function fastenv() {
-  python3 -m venv venv
+  $PYTHON -m venv venv
   venv/bin/python -m pip install --upgrade pip
   if [[ -f "requirements.txt" ]]; then
     venv/bin/python -m pip install -r requirements.txt
@@ -64,16 +85,13 @@ function fastenv() {
   source venv/bin/activate
 }
 
-function whohas() {
-  dig +short -t a $1 | head -1 | xargs whois | grep -i "org-name\|orgname" | uniq
-}
-
-## from oh-my-zsh sources ##
+## mkdir and cd with single arg ##
+## https://github.com/ohmyzsh/ohmyzsh/blob/58cba614652ce8115138fef5c7d80c8a0c0a58f4/lib/functions.zsh#L49 ##
 function take() {
   mkdir -p $@ && cd ${@:$#}
 }
 
-## tab on empty line brings autocompletes cd + displays suggestions ##
+## no command + tab shows cd with completions ##
 ## https://unix.stackexchange.com/a/32426 ##
 function first-tab() {
     if [[ $#BUFFER == 0 ]]; then
@@ -87,7 +105,7 @@ function first-tab() {
 zle -N first-tab
 
 ## enable syntax highlighting ##
-## has to be at the end of zshrc ##
+## !! has to be at the END of .zshrc ##
 #source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/local/Cellar/zsh-syntax-highlighting/0.8.0/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
