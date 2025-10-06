@@ -16,6 +16,7 @@ DNF_PACKAGES=(
   ffmpeg
   firefox
   flatpak
+  flatseal
   gnome-shell-extension-blur-my-shell
   gnome-shell-extension-dash-to-dock
   gnome-shell-extension-gsconnect 
@@ -36,6 +37,7 @@ DNF_PACKAGES=(
   ripgrep
   rsync
   snapper
+  tlp
   tree
   unzip
   vim
