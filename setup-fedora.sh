@@ -17,15 +17,19 @@ DNF_PACKAGES=(
   firefox
   flatpak
   flatseal
+  git
   gnome-shell-extension-blur-my-shell
   gnome-shell-extension-dash-to-dock
   gnome-shell-extension-gsconnect 
   gnome-shell-extension-just-perfection
   gnome-shell-extension-user-theme
   gnome-tweaks
+  go-task
   grep
   gron
   gzip
+  hadolint
+  htop
   httpie
   iftop
   jq
@@ -33,9 +37,14 @@ DNF_PACKAGES=(
   make
   mpv
   ncurses
+  openssh
+  podlet
   podman
+  podman-compose
+  podman-remote
   ripgrep
   rsync
+  shadow-utils
   snapper
   tlp
   tree
@@ -45,6 +54,8 @@ DNF_PACKAGES=(
   wget
   whois
   yq
+  zathura
+  zathura-pdf-mupdf
   zsh
   zsh-syntax-highlighting
 )
