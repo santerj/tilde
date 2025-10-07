@@ -164,7 +164,7 @@ else
 fi
 
 # Setup firewalld
-firewall-cmd --zone=public --add-service=kdeconnect --permanent
-firewall-cmd --zone=public --add-port=53317/tcp --permanent
+# firewall-cmd --zone=public --add-service=kdeconnect --permanent
+firewall-cmd --zone=public --add-port=53317/tcp --permanent  # LocalSend
 firewall-cmd --reload
 
