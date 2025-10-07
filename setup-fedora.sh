@@ -60,6 +60,16 @@ DNF_PACKAGES=(
   zsh-syntax-highlighting
 )
 
+FLATPAK_PACKAGES=(
+  io.github.flattool.Warehouse
+  io.podman_desktop.PodmanDesktop
+  org.cryptomator.Cryptomator
+  org.gnome.Extensions
+  org.localsend.localsend_app
+  org.signal.Signal
+  org.telegram.desktop
+)
+
 # 3. Update system and install packages
 if command -v dnf5 &>/dev/null; then
   dnf5 -y update
@@ -137,7 +147,7 @@ chown -R "$USERNAME:$USERNAME" "$SSH_DIR"
 
 # 8. Install GNOME Extensions app via Flatpak (user scope)
 sudo -u "$USERNAME" flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-sudo -u "$USERNAME" flatpak install -y flathub org.gnome.Extensions
+sudo -u "$USERNAME" flatpak install -y flathub "${FLATPAK_PACKAGES[@]}" 
 
 # 9. Change shell to zsh if available and not already set
 if [ -x /usr/bin/zsh ]; then
