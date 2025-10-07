@@ -13,6 +13,7 @@ chmod 440 /etc/sudoers.d/wheel-nopasswd
 # 2. Define packages to install
 DNF_PACKAGES=(
   curl
+  evolution-ews
   ffmpeg
   firefox
   flatpak
