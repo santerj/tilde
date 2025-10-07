@@ -14,6 +14,7 @@ chmod 440 /etc/sudoers.d/wheel-nopasswd
 DNF_PACKAGES=(
   acpi
   curl
+  dig
   ffmpeg
   findutils
   firefox
