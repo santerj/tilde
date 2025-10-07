@@ -12,7 +12,7 @@ export UNAME="$(uname -s)"
 alias sudo="sudo "
 alias clc="tput reset && clear"
 alias ls="ls -G"
-alias la="ls -latrshFG"
+alias la="ls -lashG --color=auto"
 alias wttr="curl wttr.in/Tampere'?'2qn"
 alias digs="dig +short"
 alias brewu="brew upgrade && brew update && brew autoremove && brew cleanup"
@@ -25,6 +25,7 @@ case $UNAME in
   Linux)
     alias finder="xdg-open ."
     alias dnfu="sudo dnf upgrade --refresh -y && sudo dnf autoremove -y && sudo dnf clean all"
+    alias flatpaku="flatpak update -y && flatpak uninstall --unused -y && flatpak repair"
     ;;
 esac
 
