@@ -13,7 +13,6 @@ chmod 440 /etc/sudoers.d/wheel-nopasswd
 # 2. Define packages to install
 DNF_PACKAGES=(
   curl
-  evolution-ews
   ffmpeg
   findutils
   firefox
@@ -68,6 +67,7 @@ FLATPAK_PACKAGES=(
   io.github.flattool.Warehouse
   io.podman_desktop.PodmanDesktop
   org.cryptomator.Cryptomator
+  org.gnome.Evolution
   org.gnome.Extensions
   org.localsend.localsend_app
   org.signal.Signal
