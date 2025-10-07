@@ -66,6 +66,7 @@ DNF_PACKAGES=(
 FLATPAK_PACKAGES=(
   com.getmailspring.Mailspring
   com.github.tchx84.Flatseal
+  com.mattjakeman.ExtensionManager
   de.haeckerfelix.Shortwave
   io.github.flattool.Warehouse
   io.podman_desktop.PodmanDesktop
