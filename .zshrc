@@ -1,11 +1,12 @@
 ## shell vars ##
 export HISTFILE="$HOME/.zsh_history"
 export SAVEHIST=500
-export SHELL='/bin/zsh'
+export SHELL='/usr/bin/zsh'
 export EDITOR='vim'
 export GIT_EDITOR='vim'
 export LESS=' -R '
 export PYTHON="$(which python3)"
+export UNAME="$(uname -s)"
 
 ## aliases ##
 alias sudo="sudo "
@@ -15,7 +16,17 @@ alias la="ls -latrshFG"
 alias wttr="curl wttr.in/Tampere'?'2qn"
 alias digs="dig +short"
 alias brewu="brew upgrade && brew update && brew autoremove && brew cleanup"
-alias finder="open . -a finder"
+
+## system dependent aliases ##
+case $UNAME in
+  Darwin)
+    alias finder="open . -a finder"
+    ;;
+  Linux)
+    alias finder="xdg-open ."
+    alias dnfu="sudo dnf upgrade --refresh -y && sudo dnf autoremove -y && sudo dnf clean all"
+    ;;
+esac
 
 ## path ##
 typeset -U path
@@ -105,7 +116,14 @@ function first-tab() {
 zle -N first-tab
 
 ## enable syntax highlighting ##
-## !! has to be at the END of .zshrc ##
-#source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/local/Cellar/zsh-syntax-highlighting/0.8.0/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+## !! this has to be at the END of .zshrc ##
+case $UNAME in
+  Darwin)
+    #source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    #source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source /usr/local/Cellar/zsh-syntax-highlighting/0.8.0/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    ;;
+  Linux)
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    ;;
+esac
