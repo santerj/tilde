@@ -15,6 +15,7 @@ DNF_PACKAGES=(
   curl
   evolution-ews
   ffmpeg
+  findutils
   firefox
   flatpak
   flatseal
