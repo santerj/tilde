@@ -12,12 +12,12 @@ chmod 440 /etc/sudoers.d/wheel-nopasswd
 
 # 2. Define packages to install
 DNF_PACKAGES=(
+  acpi
   curl
   ffmpeg
   findutils
   firefox
   flatpak
-  flatseal
   git
   gnome-shell-extension-blur-my-shell
   gnome-shell-extension-dash-to-dock
@@ -45,6 +45,7 @@ DNF_PACKAGES=(
   podman-remote
   ripgrep
   rsync
+  sensors
   shadow-utils
   snapper
   sqlite
@@ -64,6 +65,7 @@ DNF_PACKAGES=(
 
 FLATPAK_PACKAGES=(
   com.getmailspring.Mailspring
+  com.github.tchx84.Flatseal
   de.haeckerfelix.Shortwave
   io.github.flattool.Warehouse
   io.podman_desktop.PodmanDesktop
@@ -90,6 +92,7 @@ REQUIRED_REPOS=(
   rpmfusion-free
   rpmfusion-nonfree
   rpmfusion-nonfree-nvidia-driver
+  vscode
 )
 
 for repo in "${REQUIRED_REPOS[@]}"; do
@@ -109,6 +112,11 @@ for repo in "${REQUIRED_REPOS[@]}"; do
         ;;
       rpmfusion-nonfree-nvidia-driver)
         dnf -y install rpmfusion-nonfree-nvidia-driver
+        ;;
+      vscode)
+        rpm --import https://packages.microsoft.com/keys/microsoft.asc
+        echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | tee /etc/yum.repos.d/vscode.repo > /dev/null
+        dnf -y install code
         ;;
     esac
   else
