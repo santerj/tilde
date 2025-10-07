@@ -47,6 +47,7 @@ DNF_PACKAGES=(
   rsync
   shadow-utils
   snapper
+  sqlite
   tlp
   tree
   unzip
