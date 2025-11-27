@@ -2,19 +2,18 @@
 
 # NOTE: Run this script with: sudo bash setup.sh
 
-# 0. Get the invoking username (not root)
+# Get the invoking username (not root)
 USERNAME=${SUDO_USER:-$(whoami)}
 
-# 1. Ensure user is in wheel group and wheel has NOPASSWD sudo
+# Ensure user is in wheel group and wheel has NOPASSWD sudo
 usermod -aG wheel "$USERNAME"
 echo '%wheel ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/wheel-nopasswd
 chmod 440 /etc/sudoers.d/wheel-nopasswd
 
-# 2. Define packages to install
+# Define packages to install
 DNF_PACKAGES=(
   acpi
   curl
-  dig
   ffmpeg
   findutils
   firefox
@@ -67,10 +66,10 @@ DNF_PACKAGES=(
 FLATPAK_PACKAGES=(
   com.getmailspring.Mailspring
   com.github.tchx84.Flatseal
-  com.mattjakeman.ExtensionManager
   de.haeckerfelix.Shortwave
   io.github.flattool.Warehouse
   io.podman_desktop.PodmanDesktop
+  md.obsidian.Obsidian
   org.cryptomator.Cryptomator
   org.gnome.Evolution
   org.gnome.Extensions
@@ -79,7 +78,7 @@ FLATPAK_PACKAGES=(
   org.telegram.desktop
 )
 
-# 3. Update system and install packages
+# Update system and install packages
 if command -v dnf5 &>/dev/null; then
   dnf5 -y update
   dnf5 -y install --allowerasing "${DNF_PACKAGES[@]}"
@@ -88,7 +87,7 @@ else
   dnf -y install --allowerasing "${DNF_PACKAGES[@]}"
 fi
 
-# 4. Check and install nonfree repositories if missing
+# Check and install nonfree repositories if missing
 REQUIRED_REPOS=(
   fedora-cisco-openh264
   rpmfusion-free
@@ -126,12 +125,12 @@ for repo in "${REQUIRED_REPOS[@]}"; do
   fi
 done
 
-# 5. Swap ffmpeg-free for full ffmpeg from RPM Fusion
+# Swap ffmpeg-free for full ffmpeg from RPM Fusion
 if rpm -q ffmpeg-free &>/dev/null; then
   dnf -y swap ffmpeg-free ffmpeg --allowerasing
 fi
 
-# 6. Install multimedia and sound/video packages manually
+# Install multimedia and sound/video packages manually
 MULTIMEDIA_PACKAGES=(
   gstreamer1-plugins-base
   gstreamer1-plugins-good
@@ -152,7 +151,7 @@ else
   dnf -y install --allowerasing "${MULTIMEDIA_PACKAGES[@]}"
 fi
 
-# 7. Create empty SSH key files with correct permissions
+# Create empty SSH key files with correct permissions
 SSH_DIR="/home/$USERNAME/.ssh"
 mkdir -p "$SSH_DIR"
 touch "$SSH_DIR/id_rsa" "$SSH_DIR/id_rsa.pub"
@@ -160,11 +159,11 @@ chmod 600 "$SSH_DIR/id_rsa"
 chmod 644 "$SSH_DIR/id_rsa.pub"
 chown -R "$USERNAME:$USERNAME" "$SSH_DIR"
 
-# 8. Install GNOME Extensions app via Flatpak (user scope)
+# Install apps from flathub
 sudo -u "$USERNAME" flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-sudo -u "$USERNAME" flatpak install -y flathub "${FLATPAK_PACKAGES[@]}" 
+sudo -u "$USERNAME" flatpak install -y flathub "${FLATPAK_PACKAGES[@]}"
 
-# 9. Change shell to zsh if available and not already set
+# Change shell to zsh if available and not already set
 if [ -x /usr/bin/zsh ]; then
   CURRENT_SHELL=$(getent passwd "$USERNAME" | cut -d: -f7)
   if [ "$CURRENT_SHELL" != "/usr/bin/zsh" ]; then
@@ -181,3 +180,8 @@ fi
 firewall-cmd --zone=public --add-port=53317/tcp --permanent  # LocalSend
 firewall-cmd --reload
 
+# Install Homebrew if not already present (as non-root user)
+if [ ! -d "/home/linuxbrew/.linuxbrew" ]; then
+  sudo -u "$USERNAME" /bin/bash -c \
+    "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
