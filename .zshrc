@@ -128,3 +128,8 @@ case $UNAME in
     source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     ;;
 esac
+
+# add homebrew to path on linux
+if [ "$(uname)" = "Linux" ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
