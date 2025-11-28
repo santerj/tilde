@@ -49,6 +49,7 @@ DNF_PACKAGES=(
   shadow-utils
   snapper
   sqlite
+  thinkfan
   tlp
   tree
   unzip
