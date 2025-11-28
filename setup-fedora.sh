@@ -70,6 +70,7 @@ FLATPAK_PACKAGES=(
   de.haeckerfelix.Shortwave
   io.github.flattool.Warehouse
   io.podman_desktop.PodmanDesktop
+  it.mijorus.gearlever
   md.obsidian.Obsidian
   org.cryptomator.Cryptomator
   org.gnome.Evolution
