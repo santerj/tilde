@@ -26,6 +26,7 @@ case $UNAME in
     alias finder="xdg-open ."
     alias dnfu="sudo dnf upgrade --refresh -y && sudo dnf autoremove -y && sudo dnf clean all"
     alias flatpaku="flatpak update -y && flatpak uninstall --unused -y && flatpak repair"
+    alias temps="sensors |grep 'CPU' |awk '{print \$2}' |tr -d '+°C'"
     ;;
 esac
 
