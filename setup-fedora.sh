@@ -18,6 +18,7 @@ DNF_PACKAGES=(
   findutils
   firefox
   flatpak
+  gcc
   git
   gnome-shell-extension-blur-my-shell
   gnome-shell-extension-dash-to-dock
@@ -160,6 +161,9 @@ touch "$SSH_DIR/id_rsa" "$SSH_DIR/id_rsa.pub"
 chmod 600 "$SSH_DIR/id_rsa"
 chmod 644 "$SSH_DIR/id_rsa.pub"
 chown -R "$USERNAME:$USERNAME" "$SSH_DIR"
+
+# Create dirs in home directory
+mkdir -p "home/$USERNAME/{repos,temp}"
 
 # Install apps from flathub
 sudo -u "$USERNAME" flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
