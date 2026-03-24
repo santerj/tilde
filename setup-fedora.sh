@@ -36,16 +36,22 @@ DNF_PACKAGES=(
   iftop
   jq
   less
+  libyaml-devel
   make
   mpv
   ncurses
+  npm
   openssh
+  openssl-devel
   podlet
   podman
   podman-compose
   podman-remote
+  readline-devel
   ripgrep
   rsync
+  ruby
+  ruby-devel
   sensors
   shadow-utils
   snapper
@@ -61,6 +67,7 @@ DNF_PACKAGES=(
   yq
   zathura
   zathura-pdf-mupdf
+  zlib-devel
   zsh
   zsh-syntax-highlighting
 )
