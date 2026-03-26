@@ -34,8 +34,9 @@ DNF_PACKAGES=(
   hadolint
   htop
   httpie
-  iftop
-  jq
+  iftop 
+  jq 
+  keyd
   less
   libyaml-devel
   make
