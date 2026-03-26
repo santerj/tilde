@@ -48,6 +48,7 @@ DNF_PACKAGES=(
   podman
   podman-compose
   podman-remote
+  rclone
   readline-devel
   ripgrep
   rsync
