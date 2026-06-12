@@ -10,6 +10,8 @@ brew "tree"
 brew "ansible"
 # Core application library for C
 brew "glib"
+# Tool for exploring each layer in a docker image
+brew "dive"
 # Convert text between DOS, UNIX, and Mac formats
 brew "dos2unix"
 # Play, record, convert, and stream select audio and video codecs
@@ -88,6 +90,8 @@ brew "ripgrep"
 brew "source-highlight"
 # Test SSL/TLS enabled services to discover supported cipher suites
 brew "sslscan"
+# Change macOS audio source from the command-line
+brew "switchaudio-osx"
 # Extraction utility for .zip compressed archives
 brew "unzip"
 # Executes a program periodically, showing output fullscreen
