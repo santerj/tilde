@@ -87,6 +87,7 @@ FLATPAK_PACKAGES=(
   org.gnome.Evolution
   org.gnome.Extensions
   org.localsend.localsend_app
+  org.mozilla.thunderbird
   org.signal.Signal
   org.telegram.desktop
 )
