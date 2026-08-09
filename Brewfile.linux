@@ -4,6 +4,8 @@ brew "dive"
 brew "lazydocker"
 # Interactive TUI for Homebrew
 brew "taproom"
+# Command-line client for WebSockets
+brew "websocat"
 vscode "alexcvzz.vscode-sqlite"
 vscode "batisteo.vscode-django"
 vscode "bradlc.vscode-tailwindcss"
