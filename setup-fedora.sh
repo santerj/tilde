@@ -13,6 +13,7 @@ chmod 440 /etc/sudoers.d/wheel-nopasswd
 # Define packages to install
 DNF_PACKAGES=(
   acpi
+  ansible
   curl
   evolution-ews
   ffmpeg
@@ -76,7 +77,6 @@ DNF_PACKAGES=(
 )
 
 FLATPAK_PACKAGES=(
-  com.getmailspring.Mailspring
   com.github.tchx84.Flatseal
   de.haeckerfelix.Shortwave
   io.github.flattool.Warehouse
