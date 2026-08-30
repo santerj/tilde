@@ -56,6 +56,7 @@ DNF_PACKAGES=(
   rsync
   ruby
   ruby-devel
+  rubygem-rails
   sensors
   shadow-utils
   snapper
