@@ -2,7 +2,6 @@ tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
 tap "homebrew/services"
-tap "ngrok/ngrok"
 tap "santerj/boss-katana"
 # Core application library for C
 brew "glib"
@@ -126,8 +125,6 @@ cask "rockboxutility"
 cask "signal"
 # Application to control your PlayStation 4 or PlayStation 5
 cask "sony-ps-remote-play"
-# Music streaming service
-cask "spotify"
 # Messaging app with a focus on speed and security
 cask "telegram"
 # Free and open-source OpenVPN client
