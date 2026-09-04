@@ -179,7 +179,7 @@ cask "steam"
 # Messaging app with a focus on speed and security
 cask "telegram"
 # Free and open-source OpenVPN client
-# cask "tunnelblick"
+#cask "tunnelblick"
 # Tool to invert scroll direction for physical scroll wheels
 cask "unnaturalscrollwheels"
 # Open-source code editor
